@@ -9,9 +9,18 @@
 class CryptoHandler {
 public:
     CryptoHandler();
+    std::string currentAlgorithm = "RSA";
     void GenerateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile);
     std::string Encrypt(const std::string& plainText, const std::string& publicKeyFile);
     std::string Decrypt(const std::string& cipherText, const std::string& privateKeyFile);
+
+    void GenerateKeysRSA(const std::string& publicKeyFile, const std::string& privateKeyFile);
+    std::string EncryptRSA(const std::string& plainText, const std::string& publicKeyFile);
+    std::string DecryptRSA(const std::string& cipherText, const std::string& privateKeyFile);
+
+    void GenerateKeysElGamal(const std::string& publicKeyFile, const std::string& privateKeyFile);
+    std::string EncryptElGamal(const std::string& plainText, const std::string& publicKeyFile);
+    std::string DecryptElGamal(const std::string& cipherText, const std::string& privateKeyFile);
 };
 
 #endif // CRYPTOHANDLER_H

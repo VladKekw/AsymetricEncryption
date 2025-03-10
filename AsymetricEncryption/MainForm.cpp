@@ -3,7 +3,8 @@
 #include <shlobj.h>
 #include <string>
 #include <cwchar>
-
+#include <iostream>
+#include <stdexcept>
 MainForm::MainForm(HINSTANCE hInstance) {
     this->hInstance = hInstance;
 }
@@ -23,17 +24,25 @@ void MainForm::OnEncrypt() {
         return;
     }
 
-    std::string plainText = FileHandler::ReadFile(selectedFile);
-    std::string encryptedText = cryptoHandler.Encrypt(plainText, selectedKey);
+    try {
+        std::string plainText = FileHandler::ReadFile(selectedFile);
+        std::string encryptedText = cryptoHandler.Encrypt(plainText, selectedKey);
 
-    if (!encryptedText.empty()) {
-        FileHandler::WriteFile(selectedFile, encryptedText);
-        MessageBox(hwnd, L"Файл зашифровано успішно!", L"Готово", MB_OK | MB_ICONINFORMATION);
+        if (!encryptedText.empty()) {
+            FileHandler::WriteFile(selectedFile, encryptedText);
+            MessageBox(hwnd, L"Файл зашифровано успішно!", L"Готово", MB_OK | MB_ICONINFORMATION);
+        }
+        else {
+            MessageBox(hwnd, L"Помилка шифрування!", L"Помилка", MB_OK | MB_ICONERROR);
+        }
     }
-    else {
-        MessageBox(hwnd, L"Помилка шифрування!", L"Помилка", MB_OK | MB_ICONERROR);
+    catch (const std::runtime_error& e) {
+        std::cerr << "Помилка: " << e.what() << std::endl;
+        MessageBox(hwnd, L"Помилка читання файлу!", L"Помилка", MB_OK | MB_ICONERROR);
     }
 }
+
+
 
 void MainForm::OnDecrypt() {
     if (selectedFile.empty() || selectedKey.empty()) {
@@ -41,15 +50,21 @@ void MainForm::OnDecrypt() {
         return;
     }
 
-    std::string encryptedText = FileHandler::ReadFile(selectedFile);
-    std::string decryptedText = cryptoHandler.Decrypt(encryptedText, selectedKey);
+    try {
+        std::string encryptedText = FileHandler::ReadFile(selectedFile);
+        std::string decryptedText = cryptoHandler.Decrypt(encryptedText, selectedKey);
 
-    if (!decryptedText.empty()) {
-        FileHandler::WriteFile(selectedFile, decryptedText);
-        MessageBox(hwnd, L"Файл розшифровано успішно!", L"Готово", MB_OK | MB_ICONINFORMATION);
+        if (!decryptedText.empty()) {
+            FileHandler::WriteFile(selectedFile, decryptedText);
+            MessageBox(hwnd, L"Файл розшифровано успішно!", L"Готово", MB_OK | MB_ICONINFORMATION);
+        }
+        else {
+            MessageBox(hwnd, L"Помилка дешифрування!", L"Помилка", MB_OK | MB_ICONERROR);
+        }
     }
-    else {
-        MessageBox(hwnd, L"Помилка дешифрування!", L"Помилка", MB_OK | MB_ICONERROR);
+    catch (const std::runtime_error& e) {
+        std::cerr << "Помилка: " << e.what() << std::endl;
+        MessageBox(hwnd, L"Помилка читання файлу!", L"Помилка", MB_OK | MB_ICONERROR);
     }
 }
 

@@ -65,7 +65,6 @@ namespace AsymetricEncryption {
         this->îáðàòèÀëãîðèòìToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
         this->rSAToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
         this->eCCToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-        this->dSAToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
         this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
         this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
         this->label1 = (gcnew System::Windows::Forms::Label());
@@ -117,7 +116,7 @@ namespace AsymetricEncryption {
         // 
         this->îáðàòèÀëãîðèòìToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
             this->rSAToolStripMenuItem,
-                this->eCCToolStripMenuItem, this->dSAToolStripMenuItem
+                this->eCCToolStripMenuItem
         });
         this->îáðàòèÀëãîðèòìToolStripMenuItem->Name = L"îáðàòèÀëãîðèòìToolStripMenuItem";
         this->îáðàòèÀëãîðèòìToolStripMenuItem->Size = System::Drawing::Size(118, 20);
@@ -134,15 +133,12 @@ namespace AsymetricEncryption {
         // 
         this->eCCToolStripMenuItem->Name = L"eCCToolStripMenuItem";
         this->eCCToolStripMenuItem->Size = System::Drawing::Size(96, 22);
-        this->eCCToolStripMenuItem->Text = L"ECC";
+        this->eCCToolStripMenuItem->Text = L"ElGamal ";
         this->eCCToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::eCCToolStripMenuItem_Click);
         // 
         // dSAToolStripMenuItem
         // 
-        this->dSAToolStripMenuItem->Name = L"dSAToolStripMenuItem";
-        this->dSAToolStripMenuItem->Size = System::Drawing::Size(96, 22);
-        this->dSAToolStripMenuItem->Text = L"DSA";
-        this->dSAToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm::dSAToolStripMenuItem_Click);
+
         // 
         // pictureBox1
         // 
@@ -314,11 +310,9 @@ private: System::Void rSAToolStripMenuItem_Click(System::Object^ sender, System:
     mainForm->SetAlgorithm("RSA");
 }
 private: System::Void eCCToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    mainForm->SetAlgorithm("ECC");
+    mainForm->SetAlgorithm("ElGamal ");
 }
-private: System::Void dSAToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-    mainForm->SetAlgorithm("DSA");
-}
+
 
 private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
     mainForm->cryptoHandler.GenerateKeys("public.key", "private.key");

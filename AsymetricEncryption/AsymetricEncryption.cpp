@@ -1,4 +1,4 @@
-﻿#include "UIForm.h"
+﻿#include "UIForm1.h"
 #include "MainForm.h"
 #include "UIAbout.h"
 
@@ -10,8 +10,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
 
+
+
+
     MainForm* mainForm = new MainForm(hInstance);  // Создаём MainForm (он хранит методы)
-    AsymetricEncryption::UIForm^ ui = gcnew  AsymetricEncryption::UIForm(mainForm);  // Передаём mainForm в UIForm
+    AsymetricEncryption::UIForm1^ ui = gcnew  AsymetricEncryption::UIForm1(mainForm);  // Передаём mainForm в UIForm
     
 
     Application::Run(ui);  // Запускаем UI

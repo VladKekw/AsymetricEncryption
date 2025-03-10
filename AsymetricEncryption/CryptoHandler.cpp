@@ -16,7 +16,38 @@ namespace fs = std::filesystem;
 
 CryptoHandler::CryptoHandler() {}
 
+
 void CryptoHandler::GenerateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile) {
+    if (currentAlgorithm == "RSA") {
+        GenerateKeysRSA(publicKeyFile, privateKeyFile);
+    }
+    else if (currentAlgorithm == "ElGamal") {
+        GenerateKeysElGamal(publicKeyFile, privateKeyFile);
+    }
+}
+
+void CryptoHandler::GenerateKeysElGamal(const std::string& publicKeyFile, const std::string& privateKeyFile) {
+    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_DHX, nullptr);
+    EVP_PKEY* pkey = nullptr;
+
+    if (!ctx || EVP_PKEY_keygen_init(ctx) <= 0 || EVP_PKEY_generate(ctx, &pkey) <= 0) {
+        EVP_PKEY_CTX_free(ctx);
+        return;
+    }
+
+    BIO* bp_public = BIO_new_file(publicKeyFile.c_str(), "w+");
+    PEM_write_bio_PUBKEY(bp_public, pkey);
+    BIO_free(bp_public);
+
+    BIO* bp_private = BIO_new_file(privateKeyFile.c_str(), "w+");
+    PEM_write_bio_PrivateKey(bp_private, pkey, nullptr, nullptr, 0, nullptr, nullptr);
+    BIO_free(bp_private);
+
+    EVP_PKEY_free(pkey);
+    EVP_PKEY_CTX_free(ctx);
+}
+
+void CryptoHandler::GenerateKeysRSA(const std::string& publicKeyFile, const std::string& privateKeyFile) {
     EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_from_name(nullptr, "RSA", nullptr);
     EVP_PKEY* pkey = nullptr;
 
@@ -38,9 +69,44 @@ void CryptoHandler::GenerateKeys(const std::string& publicKeyFile, const std::st
 }
 
 std::string CryptoHandler::Encrypt(const std::string& plainText, const std::string& publicKeyFile) {
+    if (currentAlgorithm == "RSA") {
+        return EncryptRSA(plainText, publicKeyFile);
+    }
+    else if (currentAlgorithm == "ElGamal") {
+        return EncryptElGamal(plainText, publicKeyFile);
+    }
+    return "";
+}
+
+std::string CryptoHandler::EncryptElGamal(const std::string& plainText, const std::string& publicKeyFile) {
+    BIO* keybio = BIO_new_file(publicKeyFile.c_str(), "r");
+    EVP_PKEY* pkey = PEM_read_bio_PUBKEY(keybio, nullptr, nullptr, nullptr);
+    BIO_free(keybio);
+
+    if (!pkey) {
+        std::cerr << "Помилка завантаження ключа: " << publicKeyFile << "\n";
+        return "";
+    }
+
+    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(pkey, nullptr);
+    EVP_PKEY_encrypt_init(ctx);
+
+    size_t outlen;
+    EVP_PKEY_encrypt(ctx, nullptr, &outlen, (unsigned char*)plainText.c_str(), plainText.size());
+    std::vector<unsigned char> encryptedText(outlen);
+    EVP_PKEY_encrypt(ctx, encryptedText.data(), &outlen, (unsigned char*)plainText.c_str(), plainText.size());
+
+    EVP_PKEY_CTX_free(ctx);
+    EVP_PKEY_free(pkey);
+
+    return std::string(encryptedText.begin(), encryptedText.end());
+}
+
+
+std::string CryptoHandler::EncryptRSA(const std::string& plainText, const std::string& publicKeyFile) {
     BIO* keybio = BIO_new_file(publicKeyFile.c_str(), "r");
     if (!keybio) {
-        std::cerr << "Помилка відкриття файлу публічного ключа: " << publicKeyFile << "\n";
+        std::cerr << "??????? ???????? ????? ????????? ?????: " << publicKeyFile << "\n";
         return "";
     }
 
@@ -48,20 +114,20 @@ std::string CryptoHandler::Encrypt(const std::string& plainText, const std::stri
     BIO_free(keybio);
 
     if (!pkey) {
-        std::cerr << "Помилка завантаження публічного ключа: " << publicKeyFile << "\n";
+        std::cerr << "??????? ???????????? ????????? ?????: " << publicKeyFile << "\n";
         ERR_print_errors_fp(stderr);
         return "";
     }
 
     EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(pkey, nullptr);
     if (!ctx) {
-        std::cerr << "Помилка створення контексту для шифрування\n";
+        std::cerr << "??????? ????????? ????????? ??? ??????????\n";
         EVP_PKEY_free(pkey);
         return "";
     }
 
     if (EVP_PKEY_encrypt_init(ctx) <= 0) {
-        std::cerr << "Помилка ініціалізації шифрування\n";
+        std::cerr << "??????? ???????????? ??????????\n";
         ERR_print_errors_fp(stderr);
         EVP_PKEY_CTX_free(ctx);
         EVP_PKEY_free(pkey);
@@ -71,7 +137,7 @@ std::string CryptoHandler::Encrypt(const std::string& plainText, const std::stri
     EVP_PKEY_CTX_set_rsa_padding(ctx, RSA_PKCS1_OAEP_PADDING);
 
     int key_size = EVP_PKEY_size(pkey);
-    int max_data_size = key_size - 42;  // Ограничение RSA PKCS1_OAEP_PADDING
+    int max_data_size = key_size - 42;  // ??????????? RSA PKCS1_OAEP_PADDING
 
     std::vector<unsigned char> encrypted_data;
 
@@ -80,7 +146,7 @@ std::string CryptoHandler::Encrypt(const std::string& plainText, const std::stri
         size_t outlen;
 
         if (EVP_PKEY_encrypt(ctx, nullptr, &outlen, (unsigned char*)block.c_str(), block.size()) <= 0) {
-            std::cerr << "Помилка визначення розміру зашифрованого блоку\n";
+            std::cerr << "??????? ?????????? ?????? ????????????? ?????\n";
             ERR_print_errors_fp(stderr);
             EVP_PKEY_CTX_free(ctx);
             EVP_PKEY_free(pkey);
@@ -89,7 +155,7 @@ std::string CryptoHandler::Encrypt(const std::string& plainText, const std::stri
 
         std::vector<unsigned char> encrypted_block(outlen);
         if (EVP_PKEY_encrypt(ctx, encrypted_block.data(), &outlen, (unsigned char*)block.c_str(), block.size()) <= 0) {
-            std::cerr << "Помилка шифрування блоку\n";
+            std::cerr << "??????? ?????????? ?????\n";
             ERR_print_errors_fp(stderr);
             EVP_PKEY_CTX_free(ctx);
             EVP_PKEY_free(pkey);
@@ -105,16 +171,49 @@ std::string CryptoHandler::Encrypt(const std::string& plainText, const std::stri
     return std::string(encrypted_data.begin(), encrypted_data.end());
 }
 
-
 std::string CryptoHandler::Decrypt(const std::string& cipherText, const std::string& privateKeyFile) {
+    if (currentAlgorithm == "RSA") {
+        return DecryptRSA(cipherText, privateKeyFile);
+    }
+    else if (currentAlgorithm == "ElGamal") {
+        return DecryptElGamal(cipherText, privateKeyFile);
+    }
+    return "";
+}
+std::string CryptoHandler::DecryptElGamal(const std::string& cipherText, const std::string& privateKeyFile) {
+    BIO* keybio = BIO_new_file(privateKeyFile.c_str(), "r");
+    EVP_PKEY* pkey = PEM_read_bio_PrivateKey(keybio, nullptr, nullptr, nullptr);
+    BIO_free(keybio);
+
+    if (!pkey) {
+        std::cerr << "Ошибка загрузки приватного ключа: " << privateKeyFile << "\n";
+        return "";
+    }
+
+    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(pkey, nullptr);
+    EVP_PKEY_decrypt_init(ctx);
+
+    size_t outlen;
+    EVP_PKEY_decrypt(ctx, nullptr, &outlen, (unsigned char*)cipherText.c_str(), cipherText.size());
+    std::vector<unsigned char> decryptedText(outlen);
+    EVP_PKEY_decrypt(ctx, decryptedText.data(), &outlen, (unsigned char*)cipherText.c_str(), cipherText.size());
+
+    EVP_PKEY_CTX_free(ctx);
+    EVP_PKEY_free(pkey);
+
+    return std::string(decryptedText.begin(), decryptedText.end());
+}
+
+
+std::string CryptoHandler::DecryptRSA(const std::string& cipherText, const std::string& privateKeyFile) {
     if (cipherText.empty()) {
-        std::cerr << "Помилка: Вхідний текст порожній!\n";
+        std::cerr << "???????: ??????? ????? ????????!\n";
         return "";
     }
 
     BIO* keybio = BIO_new_file(privateKeyFile.c_str(), "r");
     if (!keybio) {
-        std::cerr << "Помилка відкриття файлу приватного ключа\n";
+        std::cerr << "??????? ???????? ????? ?????????? ?????\n";
         return "";
     }
 
@@ -122,20 +221,20 @@ std::string CryptoHandler::Decrypt(const std::string& cipherText, const std::str
     BIO_free(keybio);
 
     if (!pkey) {
-        std::cerr << "Помилка завантаження приватного ключа\n";
+        std::cerr << "??????? ???????????? ?????????? ?????\n";
         ERR_print_errors_fp(stderr);
         return "";
     }
 
     EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(pkey, nullptr);
     if (!ctx) {
-        std::cerr << "Помилка створення контексту для дешифрування\n";
+        std::cerr << "??????? ????????? ????????? ??? ????????????\n";
         EVP_PKEY_free(pkey);
         return "";
     }
 
     if (EVP_PKEY_decrypt_init(ctx) <= 0) {
-        std::cerr << "Помилка ініціалізації дешифрування\n";
+        std::cerr << "??????? ???????????? ????????????\n";
         ERR_print_errors_fp(stderr);
         EVP_PKEY_CTX_free(ctx);
         EVP_PKEY_free(pkey);
@@ -152,7 +251,7 @@ std::string CryptoHandler::Decrypt(const std::string& cipherText, const std::str
         size_t outlen;
 
         if (EVP_PKEY_decrypt(ctx, nullptr, &outlen, (unsigned char*)block.c_str(), block.size()) <= 0) {
-            std::cerr << "Помилка визначення розміру розшифрованого блоку\n";
+            std::cerr << "??????? ?????????? ?????? ?????????????? ?????\n";
             ERR_print_errors_fp(stderr);
             EVP_PKEY_CTX_free(ctx);
             EVP_PKEY_free(pkey);
@@ -161,7 +260,7 @@ std::string CryptoHandler::Decrypt(const std::string& cipherText, const std::str
 
         std::vector<unsigned char> decrypted_block(outlen);
         if (EVP_PKEY_decrypt(ctx, decrypted_block.data(), &outlen, (unsigned char*)block.c_str(), block.size()) <= 0) {
-            std::cerr << "Помилка дешифрування блоку\n";
+            std::cerr << "??????? ???????????? ?????\n";
             ERR_print_errors_fp(stderr);
             EVP_PKEY_CTX_free(ctx);
             EVP_PKEY_free(pkey);
@@ -175,17 +274,6 @@ std::string CryptoHandler::Decrypt(const std::string& cipherText, const std::str
     EVP_PKEY_free(pkey);
 
     return std::string(decrypted_data.begin(), decrypted_data.end());
-}
-// Преобразование std::wstring в UTF-8 std::string
-std::string wstring_to_utf8(const std::wstring& wstr) {
-    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
-    return converter.to_bytes(wstr);
-}
-
-// Преобразование UTF-8 std::string в std::wstring
-std::wstring utf8_to_wstring(const std::string& str) {
-    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
-    return converter.from_bytes(str);
 }
 
 

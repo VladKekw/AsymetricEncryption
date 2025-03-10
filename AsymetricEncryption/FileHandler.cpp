@@ -18,7 +18,7 @@ std::string FileHandler::ReadFile(const std::string& filePath) {
 
 void FileHandler::WriteFile(const std::string& filePath, const std::string& data) {
     if (fs::exists(filePath)) {
-        fs::remove(filePath);  // Удаляем старый файл перед записью нового
+        fs::remove(filePath);  // Видаляємо старий файл перед записом нового
     }
     std::ofstream file(filePath, std::ios::out | std::ios::binary);
     if (!file) {
