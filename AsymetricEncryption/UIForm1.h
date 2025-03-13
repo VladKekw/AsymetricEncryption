@@ -63,7 +63,8 @@ namespace AsymetricEncryption {
 
 	private:
 		MainForm* mainForm;
-		/// <summary>
+	private: System::Windows::Forms::ToolStripMenuItem^ eCCToolStripMenuItem;
+		   /// <summary>
 		/// Required designer variable.
 		/// </summary>
 		System::ComponentModel::Container ^components;
@@ -90,6 +91,7 @@ namespace AsymetricEncryption {
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->eCCToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
@@ -130,9 +132,9 @@ namespace AsymetricEncryption {
 			// 
 			// chooseAlghorithmToolStripMenuItem
 			// 
-			this->chooseAlghorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->chooseAlghorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->rSAToolStripMenuItem,
-					this->elGamalToolStripMenuItem
+					this->elGamalToolStripMenuItem, this->eCCToolStripMenuItem
 			});
 			this->chooseAlghorithmToolStripMenuItem->Name = L"chooseAlghorithmToolStripMenuItem";
 			this->chooseAlghorithmToolStripMenuItem->Size = System::Drawing::Size(119, 20);
@@ -227,6 +229,13 @@ namespace AsymetricEncryption {
 			this->label2->TabIndex = 8;
 			this->label2->Text = L"Ключ для шифрування / дешифрування";
 			// 
+			// eCCToolStripMenuItem
+			// 
+			this->eCCToolStripMenuItem->Name = L"eCCToolStripMenuItem";
+			this->eCCToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->eCCToolStripMenuItem->Text = L"ECC";
+			this->eCCToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::eCCToolStripMenuItem_Click);
+			// 
 			// UIForm1
 			// 
 			this->Icon = gcnew System::Drawing::Icon("lock.ico");
@@ -312,7 +321,10 @@ private: System::Void rSAToolStripMenuItem_Click(System::Object^ sender, System:
 	mainForm->SetAlgorithm("RSA");
 }
 private: System::Void elGamalToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	mainForm->SetAlgorithm("ElGamal ");
+	mainForm->SetAlgorithm("ElGamal");
+}
+private: System::Void eCCToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	mainForm->SetAlgorithm("ECC");
 }
 };
 }

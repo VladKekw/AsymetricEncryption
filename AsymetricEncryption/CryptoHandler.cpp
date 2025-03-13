@@ -10,6 +10,8 @@
 #include <filesystem>
 #include <codecvt>
 #include <locale>
+#include <openssl/ec.h>  
+#include <openssl/rand.h>
 
 
 namespace fs = std::filesystem;
@@ -23,6 +25,9 @@ void CryptoHandler::GenerateKeys(const std::string& publicKeyFile, const std::st
     }
     else if (currentAlgorithm == "ElGamal") {
         GenerateKeysElGamal(publicKeyFile, privateKeyFile);
+    }
+    else if (currentAlgorithm == "ECC") {
+        GenerateKeysECC(publicKeyFile, privateKeyFile);
     }
 }
 
@@ -68,6 +73,34 @@ void CryptoHandler::GenerateKeysRSA(const std::string& publicKeyFile, const std:
     EVP_PKEY_CTX_free(ctx);
 }
 
+void CryptoHandler::GenerateKeysECC(const std::string& publicKeyFile, const std::string& privateKeyFile) {
+    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_EC, nullptr);
+    EVP_PKEY* pkey = nullptr;
+
+    if (!ctx || EVP_PKEY_keygen_init(ctx) <= 0 ||
+        EVP_PKEY_CTX_set_ec_paramgen_curve_nid(ctx, NID_X9_62_prime256v1) <= 0 ||
+        EVP_PKEY_generate(ctx, &pkey) <= 0) {
+        std::cerr << "Ошибка генерации ECC-ключей\n";
+        EVP_PKEY_CTX_free(ctx);
+        return;
+    }
+
+    // Сохранение публичного ключа
+    BIO* bp_public = BIO_new_file(publicKeyFile.c_str(), "w+");
+    PEM_write_bio_PUBKEY(bp_public, pkey);
+    BIO_free(bp_public);
+
+    // Сохранение приватного ключа
+    BIO* bp_private = BIO_new_file(privateKeyFile.c_str(), "w+");
+    PEM_write_bio_PrivateKey(bp_private, pkey, nullptr, nullptr, 0, nullptr, nullptr);
+    BIO_free(bp_private);
+
+    EVP_PKEY_free(pkey);
+    EVP_PKEY_CTX_free(ctx);
+}
+
+
+
 std::string CryptoHandler::Encrypt(const std::string& plainText, const std::string& publicKeyFile) {
     if (currentAlgorithm == "RSA") {
         return EncryptRSA(plainText, publicKeyFile);
@@ -75,8 +108,43 @@ std::string CryptoHandler::Encrypt(const std::string& plainText, const std::stri
     else if (currentAlgorithm == "ElGamal") {
         return EncryptElGamal(plainText, publicKeyFile);
     }
+    else if (currentAlgorithm == "ECC") {
+        EncryptECC(plainText, publicKeyFile);
+    }
     return "";
 }
+
+std::string CryptoHandler::EncryptECC(const std::string& plainText, const std::string& publicKeyFile) {
+    BIO* keybio = BIO_new_file(publicKeyFile.c_str(), "r");
+    EVP_PKEY* pkey = PEM_read_bio_PUBKEY(keybio, nullptr, nullptr, nullptr);
+    BIO_free(keybio);
+
+    if (!pkey) {
+        std::cerr << "Ошибка загрузки публичного ключа\n";
+        return "";
+    }
+
+    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(pkey, nullptr);
+    EVP_PKEY_encrypt_init(ctx);
+
+    size_t outlen;
+    EVP_PKEY_encrypt(ctx, nullptr, &outlen, (unsigned char*)plainText.c_str(), plainText.size());
+    std::vector<unsigned char> encryptedText(outlen);
+    if (EVP_PKEY_encrypt(ctx, encryptedText.data(), &outlen, (unsigned char*)plainText.c_str(), plainText.size()) <= 0) {
+        std::cerr << "Ошибка шифрования\n";
+        EVP_PKEY_CTX_free(ctx);
+        EVP_PKEY_free(pkey);
+        return "";
+    }
+
+    EVP_PKEY_CTX_free(ctx);
+    EVP_PKEY_free(pkey);
+
+    return std::string(encryptedText.begin(), encryptedText.end());
+}
+
+
+
 
 std::string CryptoHandler::EncryptElGamal(const std::string& plainText, const std::string& publicKeyFile) {
     BIO* keybio = BIO_new_file(publicKeyFile.c_str(), "r");
@@ -178,6 +246,9 @@ std::string CryptoHandler::Decrypt(const std::string& cipherText, const std::str
     else if (currentAlgorithm == "ElGamal") {
         return DecryptElGamal(cipherText, privateKeyFile);
     }
+    else if (currentAlgorithm == "ECC") {
+        DecryptECC(cipherText, privateKeyFile);
+    }
     return "";
 }
 std::string CryptoHandler::DecryptElGamal(const std::string& cipherText, const std::string& privateKeyFile) {
@@ -277,3 +348,31 @@ std::string CryptoHandler::DecryptRSA(const std::string& cipherText, const std::
 }
 
 
+std::string CryptoHandler::DecryptECC(const std::string& cipherText, const std::string& privateKeyFile) {
+    BIO* keybio = BIO_new_file(privateKeyFile.c_str(), "r");
+    EVP_PKEY* pkey = PEM_read_bio_PrivateKey(keybio, nullptr, nullptr, nullptr);
+    BIO_free(keybio);
+
+    if (!pkey) {
+        std::cerr << "Ошибка загрузки приватного ключа\n";
+        return "";
+    }
+
+    EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new(pkey, nullptr);
+    EVP_PKEY_decrypt_init(ctx);
+
+    size_t outlen;
+    EVP_PKEY_decrypt(ctx, nullptr, &outlen, (unsigned char*)cipherText.c_str(), cipherText.size());
+    std::vector<unsigned char> decryptedText(outlen);
+    if (EVP_PKEY_decrypt(ctx, decryptedText.data(), &outlen, (unsigned char*)cipherText.c_str(), cipherText.size()) <= 0) {
+        std::cerr << "Ошибка дешифрования\n";
+        EVP_PKEY_CTX_free(ctx);
+        EVP_PKEY_free(pkey);
+        return "";
+    }
+
+    EVP_PKEY_CTX_free(ctx);
+    EVP_PKEY_free(pkey);
+
+    return std::string(decryptedText.begin(), decryptedText.end());
+}

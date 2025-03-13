@@ -21,6 +21,11 @@ public:
     void GenerateKeysElGamal(const std::string& publicKeyFile, const std::string& privateKeyFile);
     std::string EncryptElGamal(const std::string& plainText, const std::string& publicKeyFile);
     std::string DecryptElGamal(const std::string& cipherText, const std::string& privateKeyFile);
+
+    void GenerateKeysECC(const std::string& publicKeyFile, const std::string& privateKeyFile);
+    std::string EncryptECC(const std::string& plainText, const std::string& publicKeyFile);
+    std::string DecryptECC(const std::string& cipherText, const std::string& privateKeyFile);
+
 };
 
 #endif // CRYPTOHANDLER_H
