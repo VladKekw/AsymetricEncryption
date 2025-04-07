@@ -13,11 +13,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 
 
-    MainForm* mainForm = new MainForm(hInstance);  // Создаём MainForm (он хранит методы)
-    AsymetricEncryption::UIForm1^ ui = gcnew  AsymetricEncryption::UIForm1(mainForm);  // Передаём mainForm в UIForm
+    MainForm* mainForm = new MainForm(hInstance);  
+    AsymetricEncryption::UIForm1^ ui = gcnew  AsymetricEncryption::UIForm1(mainForm);  
     
 
-    Application::Run(ui);  // Запускаем UI
-    delete mainForm;  // Освобождаем память
+    Application::Run(ui);  
+    delete mainForm;  
     return 0;
 }

@@ -42,32 +42,57 @@ namespace AsymetricEncryption {
 		}
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutProgramToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ chooseFileToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ chooseKeyToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ chooseAlghorithmToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ rSAToolStripMenuItem;
-	private: System::Windows::Forms::ToolStripMenuItem^ elGamalToolStripMenuItem;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
-	private: System::Windows::Forms::PictureBox^ pictureBox2;
-	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::Button^ button3;
 	private: System::Windows::Forms::ProgressBar^ progressBar1;
-	private: System::Windows::Forms::Label^ label1;
-	private: System::Windows::Forms::Label^ label2;
-
-
-
 	protected:
-
-
 	private:
 		MainForm* mainForm;
-	private: System::Windows::Forms::ToolStripMenuItem^ eCCToolStripMenuItem;
+
+	private: System::Windows::Forms::StatusStrip^ statusStrip1;
+
+	private: System::Windows::Forms::ToolStripProgressBar^ toolStripProgressBar1;
+	private: System::Windows::Forms::ToolStripStatusLabel^ toolStripStatusLabel1;
+	private: System::Windows::Forms::ToolTip^ toolTip1;
+	private: System::Windows::Forms::ToolStripMenuItem^ Ù‡ÈÎToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ Ó·‡ÚË Î˛˜ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ mniSaveas;
+
+	private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem1;
+	private: System::Windows::Forms::ToolStripMenuItem^ Á‡ÍËÚËToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ¯ËÙÛ‚‡ÌÌˇToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ „ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ¯ËÙÛ‚‡ÚËToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ ‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripSeparator^ toolStripMenuItem2;
+	private: System::Windows::Forms::ToolStripMenuItem^ mnialgorithm;
+	private: System::Windows::Forms::ToolStripMenuItem^ mnirsa;
+	private: System::Windows::Forms::ToolStripMenuItem^ mniecc;
+	private: System::Windows::Forms::ToolStripMenuItem^ mnieig;
+	private: System::Windows::Forms::ToolStripMenuItem^ chooseKeyToolStripMenuItem;
+	private: System::Windows::Forms::ToolStrip^ toolStrip1;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButton1;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButton2;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButton3;
+
+	private: System::Windows::Forms::TextBox^ txbOrgtext;
+	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
+	private: System::Windows::Forms::TextBox^ txbCrypttext;
+	private: System::Windows::Forms::ToolStripMenuItem^ mniSave;
+	private: System::Windows::Forms::SaveFileDialog^ dlgsave;
+	private: System::Windows::Forms::ToolStripStatusLabel^ lblCurrentAlghoInfo;
+	private: System::Windows::Forms::ToolStripStatusLabel^ lblCurrentAlgho;
+
+
+
+
+
+
+	private: System::ComponentModel::IContainer^ components;
+
 		   /// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -76,38 +101,179 @@ namespace AsymetricEncryption {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UIForm1::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->Ù‡ÈÎToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->Ó·‡ÚË Î˛˜ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->mniSave = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->mniSaveas = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->Á‡ÍËÚËToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->¯ËÙÛ‚‡ÌÌˇToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->„ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->¯ËÙÛ‚‡ÚËToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->toolStripMenuItem2 = (gcnew System::Windows::Forms::ToolStripSeparator());
+			this->mnialgorithm = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->mnirsa = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->mniecc = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->mnieig = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutProgramToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->chooseFileToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->chooseKeyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->chooseAlghorithmToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->rSAToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->elGamalToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
-			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->eCCToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
+			this->toolStripStatusLabel1 = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->toolStripProgressBar1 = (gcnew System::Windows::Forms::ToolStripProgressBar());
+			this->lblCurrentAlghoInfo = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->lblCurrentAlgho = (gcnew System::Windows::Forms::ToolStripStatusLabel());
+			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
+			this->toolStripButton1 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton2 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->txbOrgtext = (gcnew System::Windows::Forms::TextBox());
+			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
+			this->txbCrypttext = (gcnew System::Windows::Forms::TextBox());
+			this->dlgsave = (gcnew System::Windows::Forms::SaveFileDialog());
 			this->menuStrip1->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			this->statusStrip1->SuspendLayout();
+			this->toolStrip1->SuspendLayout();
+			this->tableLayoutPanel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->aboutProgramToolStripMenuItem,
-					this->chooseFileToolStripMenuItem, this->chooseKeyToolStripMenuItem, this->chooseAlghorithmToolStripMenuItem
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->Ù‡ÈÎToolStripMenuItem,
+					this->¯ËÙÛ‚‡ÌÌˇToolStripMenuItem, this->aboutProgramToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Padding = System::Windows::Forms::Padding(4, 2, 0, 2);
 			this->menuStrip1->Size = System::Drawing::Size(797, 24);
 			this->menuStrip1->TabIndex = 0;
 			this->menuStrip1->Text = L"menuStrip1";
+			this->menuStrip1->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &UIForm1::menuStrip1_ItemClicked);
+			// 
+			// Ù‡ÈÎToolStripMenuItem
+			// 
+			this->Ù‡ÈÎToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
+				this->Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem,
+					this->Ó·‡ÚË Î˛˜ToolStripMenuItem, this->mniSave, this->mniSaveas, this->toolStripMenuItem1, this->Á‡ÍËÚËToolStripMenuItem
+			});
+			this->Ù‡ÈÎToolStripMenuItem->Name = L"Ù‡ÈÎToolStripMenuItem";
+			this->Ù‡ÈÎToolStripMenuItem->Size = System::Drawing::Size(48, 20);
+			this->Ù‡ÈÎToolStripMenuItem->Text = L"‘‡ÈÎ";
+			// 
+			// Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem
+			// 
+			this->Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem->Name = L"Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem";
+			this->Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem->Size = System::Drawing::Size(205, 22);
+			this->Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem->Text = L"Œ·‡ÚË ÚÂÍÒÚÓ‚ËÈ Ù‡ÈÎ";
+			this->Ó·‡ÚË“ÂÍÒÚÓ‚ËÈ‘‡ÈÎToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::chooseFileToolStripMenuItem_Click);
+			// 
+			// Ó·‡ÚË Î˛˜ToolStripMenuItem
+			// 
+			this->Ó·‡ÚË Î˛˜ToolStripMenuItem->Name = L"Ó·‡ÚË Î˛˜ToolStripMenuItem";
+			this->Ó·‡ÚË Î˛˜ToolStripMenuItem->Size = System::Drawing::Size(205, 22);
+			this->Ó·‡ÚË Î˛˜ToolStripMenuItem->Text = L"Œ·‡ÚË ÍÎ˛˜";
+			this->Ó·‡ÚË Î˛˜ToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::chooseKeyToolStripMenuItem_Click);
+			// 
+			// mniSave
+			// 
+			this->mniSave->Name = L"mniSave";
+			this->mniSave->Size = System::Drawing::Size(205, 22);
+			this->mniSave->Text = L"«·ÂÂ„ÚË";
+			this->mniSave->Click += gcnew System::EventHandler(this, &UIForm1::mniSave_Click);
+			// 
+			// mniSaveas
+			// 
+			this->mniSaveas->Name = L"mniSaveas";
+			this->mniSaveas->Size = System::Drawing::Size(205, 22);
+			this->mniSaveas->Text = L"«·ÂÂ„ÚË ˇÍ";
+			this->mniSaveas->Click += gcnew System::EventHandler(this, &UIForm1::mniSaveas_Click);
+			// 
+			// toolStripMenuItem1
+			// 
+			this->toolStripMenuItem1->Name = L"toolStripMenuItem1";
+			this->toolStripMenuItem1->Size = System::Drawing::Size(202, 6);
+			// 
+			// Á‡ÍËÚËToolStripMenuItem
+			// 
+			this->Á‡ÍËÚËToolStripMenuItem->Name = L"Á‡ÍËÚËToolStripMenuItem";
+			this->Á‡ÍËÚËToolStripMenuItem->Size = System::Drawing::Size(205, 22);
+			this->Á‡ÍËÚËToolStripMenuItem->Text = L"«‡ÍËÚË";
+			this->Á‡ÍËÚËToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::Á‡ÍËÚËToolStripMenuItem_Click);
+			// 
+			// ¯ËÙÛ‚‡ÌÌˇToolStripMenuItem
+			// 
+			this->¯ËÙÛ‚‡ÌÌˇToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->„ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem,
+					this->¯ËÙÛ‚‡ÚËToolStripMenuItem, this->‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem, this->toolStripMenuItem2, this->mnialgorithm
+			});
+			this->¯ËÙÛ‚‡ÌÌˇToolStripMenuItem->Name = L"¯ËÙÛ‚‡ÌÌˇToolStripMenuItem";
+			this->¯ËÙÛ‚‡ÌÌˇToolStripMenuItem->Size = System::Drawing::Size(91, 20);
+			this->¯ËÙÛ‚‡ÌÌˇToolStripMenuItem->Text = L"ÿËÙÛ‚‡ÌÌˇ";
+			// 
+			// „ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem
+			// 
+			this->„ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem->Name = L"„ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem";
+			this->„ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->„ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem->Text = L"√ÂÌÂÛ‚‡ÚË ÍÎ˛˜≥";
+			this->„ÂÌÂÛ‚‡ÚË Î˛˜≥ToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::button1_Click);
+			// 
+			// ¯ËÙÛ‚‡ÚËToolStripMenuItem
+			// 
+			this->¯ËÙÛ‚‡ÚËToolStripMenuItem->Name = L"¯ËÙÛ‚‡ÚËToolStripMenuItem";
+			this->¯ËÙÛ‚‡ÚËToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->¯ËÙÛ‚‡ÚËToolStripMenuItem->Text = L"ÿËÙÛ‚‡ÚË";
+			this->¯ËÙÛ‚‡ÚËToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::button2_Click);
+			// 
+			// ‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem
+			// 
+			this->‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem->Name = L"‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem";
+			this->‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem->Text = L"ƒÂ¯ËÙÛ‚‡ÚË";
+			this->‰Â¯ËÙÛ‚‡ÚËToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::button3_Click);
+			// 
+			// toolStripMenuItem2
+			// 
+			this->toolStripMenuItem2->Name = L"toolStripMenuItem2";
+			this->toolStripMenuItem2->Size = System::Drawing::Size(177, 6);
+			// 
+			// mnialgorithm
+			// 
+			this->mnialgorithm->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->mnirsa,
+					this->mniecc, this->mnieig
+			});
+			this->mnialgorithm->Name = L"mnialgorithm";
+			this->mnialgorithm->Size = System::Drawing::Size(180, 22);
+			this->mnialgorithm->Text = L"¿Î„ÓËÚÏË";
+			// 
+			// mnirsa
+			// 
+			this->mnirsa->CheckOnClick = true;
+			this->mnirsa->Name = L"mnirsa";
+			this->mnirsa->Size = System::Drawing::Size(117, 22);
+			this->mnirsa->Text = L"RSA";
+			this->mnirsa->Click += gcnew System::EventHandler(this, &UIForm1::toolStripMenuItem8_Click);
+			// 
+			// mniecc
+			// 
+			this->mniecc->Name = L"mniecc";
+			this->mniecc->Size = System::Drawing::Size(117, 22);
+			this->mniecc->Text = L"ECC";
+			this->mniecc->Click += gcnew System::EventHandler(this, &UIForm1::toolStripMenuItem8_Click);
+			// 
+			// mnieig
+			// 
+			this->mnieig->Name = L"mnieig";
+			this->mnieig->Size = System::Drawing::Size(117, 22);
+			this->mnieig->Text = L"ElGamal";
+			this->mnieig->Click += gcnew System::EventHandler(this, &UIForm1::toolStripMenuItem8_Click);
 			// 
 			// aboutProgramToolStripMenuItem
 			// 
@@ -116,148 +282,168 @@ namespace AsymetricEncryption {
 			this->aboutProgramToolStripMenuItem->Text = L"œÓ ÔÓ„‡ÏÛ";
 			this->aboutProgramToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::aboutProgramToolStripMenuItem_Click);
 			// 
-			// chooseFileToolStripMenuItem
-			// 
-			this->chooseFileToolStripMenuItem->Name = L"chooseFileToolStripMenuItem";
-			this->chooseFileToolStripMenuItem->Size = System::Drawing::Size(284, 20);
-			this->chooseFileToolStripMenuItem->Text = L"Œ·‡ÚË Ù‡ÈÎ ‰Îˇ ¯ËÙÛ‚‡ÌÌˇ / ‰Â¯ËÙÛ‚‡ÌÌˇ";
-			this->chooseFileToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::chooseFileToolStripMenuItem_Click);
-			// 
-			// chooseKeyToolStripMenuItem
-			// 
-			this->chooseKeyToolStripMenuItem->Name = L"chooseKeyToolStripMenuItem";
-			this->chooseKeyToolStripMenuItem->Size = System::Drawing::Size(285, 20);
-			this->chooseKeyToolStripMenuItem->Text = L"Œ·‡ÚË ÍÎ˛˜ ‰Îˇ ¯ËÙÛ‚‡ÌÌˇ / ‰Â¯ËÙÛ‚‡ÌÌˇ";
-			this->chooseKeyToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::chooseKeyToolStripMenuItem_Click);
-			// 
-			// chooseAlghorithmToolStripMenuItem
-			// 
-			this->chooseAlghorithmToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->rSAToolStripMenuItem,
-					this->elGamalToolStripMenuItem, this->eCCToolStripMenuItem
-			});
-			this->chooseAlghorithmToolStripMenuItem->Name = L"chooseAlghorithmToolStripMenuItem";
-			this->chooseAlghorithmToolStripMenuItem->Size = System::Drawing::Size(119, 20);
-			this->chooseAlghorithmToolStripMenuItem->Text = L"Œ·‡ÚË ‡Î„ÓËÚÏ ";
-			// 
-			// rSAToolStripMenuItem
-			// 
-			this->rSAToolStripMenuItem->Name = L"rSAToolStripMenuItem";
-			this->rSAToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->rSAToolStripMenuItem->Text = L"RSA";
-			this->rSAToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::rSAToolStripMenuItem_Click);
-			// 
-			// elGamalToolStripMenuItem
-			// 
-			this->elGamalToolStripMenuItem->Name = L"elGamalToolStripMenuItem";
-			this->elGamalToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->elGamalToolStripMenuItem->Text = L"ElGamal";
-			this->elGamalToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::elGamalToolStripMenuItem_Click);
-			// 
-			// pictureBox1
-			// 
-			this->pictureBox1->Location = System::Drawing::Point(116, 79);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(118, 113);
-			this->pictureBox1->TabIndex = 1;
-			this->pictureBox1->TabStop = false;
-			this->pictureBox1->Image = Image::FromFile(Application::StartupPath + "\\close.png");
-			this->pictureBox1->SizeMode = PictureBoxSizeMode::Zoom;
-			// 
-			// pictureBox2
-			// 
-			this->pictureBox2->Location = System::Drawing::Point(560, 79);
-			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(118, 113);
-			this->pictureBox2->TabIndex = 2;
-			this->pictureBox2->TabStop = false;
-			this->pictureBox2->Image = Image::FromFile(Application::StartupPath + "\\close.png");
-			this->pictureBox2->SizeMode = PictureBoxSizeMode::Zoom;
-			// 
-			// button1
-			// 
-			this->button1->Location = System::Drawing::Point(322, 223);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(106, 23);
-			this->button1->TabIndex = 3;
-			this->button1->Text = L"√ÂÌÂÛ‚‡ÚË ÍÎ˛˜≥";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &UIForm1::button1_Click);
-			// 
-			// button2
-			// 
-			this->button2->Location = System::Drawing::Point(322, 274);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(106, 23);
-			this->button2->TabIndex = 4;
-			this->button2->Text = L"ÿËÙÛ‚‡ÚË";
-			this->button2->UseVisualStyleBackColor = true;
-			this->button2->Click += gcnew System::EventHandler(this, &UIForm1::button2_Click);
-			// 
-			// button3
-			// 
-			this->button3->Location = System::Drawing::Point(322, 322);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(106, 23);
-			this->button3->TabIndex = 5;
-			this->button3->Text = L"‰Â¯ËÙÛ‚‡ÚË";
-			this->button3->UseVisualStyleBackColor = true;
-			this->button3->Click += gcnew System::EventHandler(this, &UIForm1::button3_Click);
-			// 
 			// progressBar1
 			// 
-			this->progressBar1->Location = System::Drawing::Point(322, 371);
+			this->progressBar1->Location = System::Drawing::Point(322, 397);
 			this->progressBar1->Name = L"progressBar1";
 			this->progressBar1->Size = System::Drawing::Size(106, 23);
 			this->progressBar1->TabIndex = 6;
 			// 
-			// label1
+			// statusStrip1
 			// 
-			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(47, 51);
-			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(263, 13);
-			this->label1->TabIndex = 7;
-			this->label1->Text = L"“ÂÍÒÚÓ‚ËÈ Ù‡ÈÎ ‰Îˇ ¯ËÙÛ‚‡ÌÌˇ / ‰Â¯ËÙÛ‚‡ÌÌˇ";
+			this->statusStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->statusStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->toolStripStatusLabel1,
+					this->toolStripProgressBar1, this->lblCurrentAlghoInfo, this->lblCurrentAlgho
+			});
+			this->statusStrip1->Location = System::Drawing::Point(0, 397);
+			this->statusStrip1->Name = L"statusStrip1";
+			this->statusStrip1->Size = System::Drawing::Size(797, 22);
+			this->statusStrip1->TabIndex = 9;
+			this->statusStrip1->Text = L"Current status";
+			this->statusStrip1->ItemClicked += gcnew System::Windows::Forms::ToolStripItemClickedEventHandler(this, &UIForm1::statusStrip1_ItemClicked);
 			// 
-			// label2
+			// toolStripStatusLabel1
 			// 
-			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(509, 51);
-			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(206, 13);
-			this->label2->TabIndex = 8;
-			this->label2->Text = L" Î˛˜ ‰Îˇ ¯ËÙÛ‚‡ÌÌˇ / ‰Â¯ËÙÛ‚‡ÌÌˇ";
+			this->toolStripStatusLabel1->Name = L"toolStripStatusLabel1";
+			this->toolStripStatusLabel1->Size = System::Drawing::Size(166, 17);
+			this->toolStripStatusLabel1->Text = L"œÓÚÓ˜ÌËÈ ÔÓ„ÂÒ ÓÔÂ‡ˆ≥ø: ";
+			this->toolStripStatusLabel1->Click += gcnew System::EventHandler(this, &UIForm1::toolStripStatusLabel1_Click_1);
 			// 
-			// eCCToolStripMenuItem
+			// toolStripProgressBar1
 			// 
-			this->eCCToolStripMenuItem->Name = L"eCCToolStripMenuItem";
-			this->eCCToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->eCCToolStripMenuItem->Text = L"ECC";
-			this->eCCToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::eCCToolStripMenuItem_Click);
+			this->toolStripProgressBar1->Name = L"toolStripProgressBar1";
+			this->toolStripProgressBar1->Size = System::Drawing::Size(100, 16);
+			// 
+			// lblCurrentAlghoInfo
+			// 
+			this->lblCurrentAlghoInfo->Name = L"lblCurrentAlghoInfo";
+			this->lblCurrentAlghoInfo->Size = System::Drawing::Size(125, 17);
+			this->lblCurrentAlghoInfo->Text = L"œÓÚÓ˜ÌËÈ ‡Î„ÓËÚÏ: ";
+			this->lblCurrentAlghoInfo->Click += gcnew System::EventHandler(this, &UIForm1::lblCurrentAlgho_Click);
+			// 
+			// lblCurrentAlgho
+			// 
+			this->lblCurrentAlgho->Name = L"lblCurrentAlgho";
+			this->lblCurrentAlgho->Size = System::Drawing::Size(28, 17);
+			this->lblCurrentAlgho->Text = L"RSA";
+			// 
+			// toolTip1
+			// 
+			this->toolTip1->AutoPopDelay = 5000;
+			this->toolTip1->InitialDelay = 500;
+			this->toolTip1->ReshowDelay = 200;
+			// 
+			// toolStrip1
+			// 
+			this->toolStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
+			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
+				this->toolStripButton1,
+					this->toolStripButton2, this->toolStripButton3
+			});
+			this->toolStrip1->Location = System::Drawing::Point(0, 24);
+			this->toolStrip1->Name = L"toolStrip1";
+			this->toolStrip1->Size = System::Drawing::Size(797, 27);
+			this->toolStrip1->TabIndex = 10;
+			this->toolStrip1->Text = L"toolStrip1";
+			// 
+			// toolStripButton1
+			// 
+			this->toolStripButton1->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton1.Image")));
+			this->toolStripButton1->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton1->Name = L"toolStripButton1";
+			this->toolStripButton1->Size = System::Drawing::Size(24, 24);
+			this->toolStripButton1->Text = L"toolStripButton1";
+			this->toolStripButton1->Click += gcnew System::EventHandler(this, &UIForm1::button1_Click);
+			// 
+			// toolStripButton2
+			// 
+			this->toolStripButton2->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton2.Image")));
+			this->toolStripButton2->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton2->Name = L"toolStripButton2";
+			this->toolStripButton2->Size = System::Drawing::Size(24, 24);
+			this->toolStripButton2->Text = L"toolStripButton2";
+			this->toolStripButton2->Click += gcnew System::EventHandler(this, &UIForm1::button2_Click);
+			// 
+			// toolStripButton3
+			// 
+			this->toolStripButton3->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButton3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton3.Image")));
+			this->toolStripButton3->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButton3->Name = L"toolStripButton3";
+			this->toolStripButton3->Size = System::Drawing::Size(24, 24);
+			this->toolStripButton3->Text = L"toolStripButton3";
+			this->toolStripButton3->Click += gcnew System::EventHandler(this, &UIForm1::button3_Click);
+			// 
+			// txbOrgtext
+			// 
+			this->txbOrgtext->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->txbOrgtext->Location = System::Drawing::Point(2, 2);
+			this->txbOrgtext->Margin = System::Windows::Forms::Padding(2);
+			this->txbOrgtext->Multiline = true;
+			this->txbOrgtext->Name = L"txbOrgtext";
+			this->txbOrgtext->ReadOnly = true;
+			this->txbOrgtext->Size = System::Drawing::Size(394, 342);
+			this->txbOrgtext->TabIndex = 11;
+			// 
+			// tableLayoutPanel1
+			// 
+			this->tableLayoutPanel1->ColumnCount = 2;
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel1->ColumnStyles->Add((gcnew System::Windows::Forms::ColumnStyle(System::Windows::Forms::SizeType::Percent,
+				50)));
+			this->tableLayoutPanel1->Controls->Add(this->txbCrypttext, 1, 0);
+			this->tableLayoutPanel1->Controls->Add(this->txbOrgtext, 0, 0);
+			this->tableLayoutPanel1->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->tableLayoutPanel1->Location = System::Drawing::Point(0, 51);
+			this->tableLayoutPanel1->Margin = System::Windows::Forms::Padding(2);
+			this->tableLayoutPanel1->Name = L"tableLayoutPanel1";
+			this->tableLayoutPanel1->RowCount = 1;
+			this->tableLayoutPanel1->RowStyles->Add((gcnew System::Windows::Forms::RowStyle(System::Windows::Forms::SizeType::Percent, 50)));
+			this->tableLayoutPanel1->Size = System::Drawing::Size(797, 346);
+			this->tableLayoutPanel1->TabIndex = 12;
+			// 
+			// txbCrypttext
+			// 
+			this->txbCrypttext->Dock = System::Windows::Forms::DockStyle::Fill;
+			this->txbCrypttext->Location = System::Drawing::Point(400, 2);
+			this->txbCrypttext->Margin = System::Windows::Forms::Padding(2);
+			this->txbCrypttext->Multiline = true;
+			this->txbCrypttext->Name = L"txbCrypttext";
+			this->txbCrypttext->ReadOnly = true;
+			this->txbCrypttext->Size = System::Drawing::Size(395, 342);
+			this->txbCrypttext->TabIndex = 12;
+			// 
+			// dlgsave
+			// 
+			this->dlgsave->FileOk += gcnew System::ComponentModel::CancelEventHandler(this, &UIForm1::dlgsave_FileOk);
 			// 
 			// UIForm1
 			// 
-			this->Icon = gcnew System::Drawing::Icon("lock.ico");
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(797, 419);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->Controls->Add(this->tableLayoutPanel1);
+			this->Controls->Add(this->toolStrip1);
+			this->Controls->Add(this->statusStrip1);
 			this->Controls->Add(this->progressBar1);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
-			this->Controls->Add(this->pictureBox2);
-			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->menuStrip1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->MainMenuStrip = this->menuStrip1;
+			this->MaximizeBox = false;
 			this->Name = L"UIForm1";
 			this->Text = L"¿ÒËÏÂÚË˜ÌËÈ ¯ËÙÛ‚‡Î¸ÌËÍ";
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			this->statusStrip1->ResumeLayout(false);
+			this->statusStrip1->PerformLayout();
+			this->toolStrip1->ResumeLayout(false);
+			this->toolStrip1->PerformLayout();
+			this->tableLayoutPanel1->ResumeLayout(false);
+			this->tableLayoutPanel1->PerformLayout();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -269,53 +455,59 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	MessageBox::Show(L" Î˛˜≥ ÛÒÔ≥¯ÌÓ Á„ÂÌÂÓ‚‡ÌÓ!", L"√ÂÌÂ‡ˆ≥ˇ ÍÎ˛˜≥‚", MessageBoxButtons::OK, MessageBoxIcon::Information);
 }
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
-	progressBar1->Value = 0;
+	toolStripProgressBar1->Value = 0;
 	mainForm->OnEncrypt();
-	progressBar1->Value = 34;
-	progressBar1->Value = 100;
-}
-private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-	progressBar1->Value = 0;
-	mainForm->OnDecrypt();
-	progressBar1->Value = 56;
+	toolStripProgressBar1->Value = 34;
 
-	progressBar1->Value = 100;
+	String^ selectedFile = gcnew String(mainForm->GetSelectedFile().c_str());
+	if (!String::IsNullOrEmpty(selectedFile)) {
+		txbCrypttext->Text = System::IO::File::ReadAllText(selectedFile);
+	}
+	toolStripProgressBar1->Value = 100;
+
+}
+	private: System::Void dlgsave_FileOk(System::Object^ sender, System::ComponentModel::CancelEventArgs^ e) {
+	
+	}
+
+
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	toolStripProgressBar1->Value = 0;
+	mainForm->OnDecrypt();
+	toolStripProgressBar1->Value = 56;
+
+	String^ selectedFile = gcnew String(mainForm->GetSelectedFile().c_str());
+	if (!String::IsNullOrEmpty(selectedFile)) {
+		txbCrypttext->Text = System::IO::File::ReadAllText(selectedFile);
+	}
+
+	toolStripProgressBar1->Value = 100;
 }
 private: System::Void aboutProgramToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	progressBar1->Value = 0;
+	toolStripProgressBar1->Value = 0;
 	AsymetricEncryption::UIAbout^ uia = gcnew AsymetricEncryption::UIAbout();
 	uia->ShowDialog();
 }
 private: System::Void chooseFileToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	progressBar1->Value = 0;
+	toolStripProgressBar1->Value = 0;
 	mainForm->OnOpenFile();
 
 	String^ selectedFile = gcnew String(mainForm->GetSelectedFile().c_str());
-	MessageBox::Show(selectedFile, "Œ·‡ÌËÈ Ù‡ÈÎ");  // œÓ‚ÂˇÂÏ ÔÛÚ¸ ‚ MessageBox
+	if (!String::IsNullOrEmpty(selectedFile)) {
+		txbOrgtext->Text = System::IO::File::ReadAllText(selectedFile);
+	}
+	MessageBox::Show(selectedFile, "Œ·‡ÌËÈ Ù‡ÈÎ");  
 
-	if (!String::IsNullOrEmpty(selectedFile) && System::IO::File::Exists(selectedFile)) {
-		this->pictureBox1->Image = Image::FromFile(Application::StartupPath + "\\txt-file.png");
-	}
-	else {
-		this->pictureBox1->Image = Image::FromFile(Application::StartupPath + "\\close.png");
-	}
 }
 private: System::Void chooseKeyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	progressBar1->Value = 0;
+	toolStripProgressBar1->Value = 0;
 	mainForm->OnSelectKey();
 
 
-	MessageBox::Show(gcnew String(mainForm->GetSelectedKey().c_str()), "¬Ë·‡ÌËÈ ÍÎ˛˜");
+	MessageBox::Show(gcnew String(mainForm->GetSelectedKey().c_str()), "Œ·‡ÌËÈ ÍÎ˛˜");
 	String^ selectedFile = gcnew String(mainForm->GetSelectedFile().c_str());
 	MessageBox::Show(selectedFile, "Œ·‡ÌËÈ Ù‡ÈÎ");
 
-
-	if (!String::IsNullOrEmpty(selectedFile) && System::IO::File::Exists(selectedFile)) {
-		this->pictureBox2->Image = Image::FromFile(Application::StartupPath + "\\key.png");
-	}
-	else {
-		this->pictureBox2->Image = Image::FromFile(Application::StartupPath + "\\close.png");
-	}
 }
 private: System::Void rSAToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	mainForm->SetAlgorithm("RSA");
@@ -325,6 +517,52 @@ private: System::Void elGamalToolStripMenuItem_Click(System::Object^ sender, Sys
 }
 private: System::Void eCCToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	mainForm->SetAlgorithm("ECC");
+}
+
+private: System::Void statusStrip1_ItemClicked(System::Object^ sender, System::Windows::Forms::ToolStripItemClickedEventArgs^ e) {
+}
+private: System::Void label3_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void toolStripStatusLabel1_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void toolStripStatusLabel1_Click_1(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void menuStrip1_ItemClicked(System::Object^ sender, System::Windows::Forms::ToolStripItemClickedEventArgs^ e) {
+}
+private: System::Void ‡Î„ÓËÚÏToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void toolStripMenuItem8_Click(System::Object^ sender, System::EventArgs^ e) {
+	ToolStripMenuItem^ item = dynamic_cast<ToolStripMenuItem^>(sender);
+	if (item) {
+		mnirsa->Checked = false;
+		mniecc->Checked = false;
+		mnieig->Checked = false;
+
+		item->Checked = true;
+		std::string algorithm = msclr::interop::marshal_as<std::string>(item->Text);
+		mainForm->SetAlgorithm(algorithm);
+		lblCurrentAlgho->Text = item->Text;
+	}
+}
+
+private: System::Void mniSaveas_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (dlgsave->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+		System::IO::File::WriteAllText(dlgsave->FileName, txbCrypttext->Text);
+		MessageBox::Show(L"‘‡ÈÎ Á·ÂÂÊÂÌÓ!", L"«·ÂÂÊÂÌÌˇ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+}
+
+private: System::Void mniSave_Click(System::Object^ sender, System::EventArgs^ e) {
+	String^ filePath = gcnew String(mainForm->GetSelectedFile().c_str());
+	if (!String::IsNullOrEmpty(filePath)) {
+		System::IO::File::WriteAllText(filePath, txbCrypttext->Text);
+		MessageBox::Show(L"‘‡ÈÎ ÓÌÓ‚ÎÂÌÓ!", L"«·ÂÂÊÂÌÌˇ", MessageBoxButtons::OK, MessageBoxIcon::Information);
+	}
+}
+private: System::Void lblCurrentAlgho_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void Á‡ÍËÚËToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
 }
 };
 }

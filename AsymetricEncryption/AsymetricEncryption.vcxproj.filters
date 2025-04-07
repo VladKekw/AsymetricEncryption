@@ -36,10 +36,10 @@
     <ClInclude Include="AsymetricEncryption.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UIForm.h">
+    <ClInclude Include="UIAbout.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UIAbout.h">
+    <ClInclude Include="UIForm1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,10 +56,10 @@
     <ClCompile Include="CryptoHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UIForm.cpp">
+    <ClCompile Include="UIAbout.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UIAbout.cpp">
+    <ClCompile Include="UIForm1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

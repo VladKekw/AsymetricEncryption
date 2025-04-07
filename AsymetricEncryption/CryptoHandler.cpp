@@ -80,17 +80,15 @@ void CryptoHandler::GenerateKeysECC(const std::string& publicKeyFile, const std:
     if (!ctx || EVP_PKEY_keygen_init(ctx) <= 0 ||
         EVP_PKEY_CTX_set_ec_paramgen_curve_nid(ctx, NID_X9_62_prime256v1) <= 0 ||
         EVP_PKEY_generate(ctx, &pkey) <= 0) {
-        std::cerr << "Ошибка генерации ECC-ключей\n";
+        std::cerr << "Помилка генерації ECC ключів\n";
         EVP_PKEY_CTX_free(ctx);
         return;
     }
 
-    // Сохранение публичного ключа
     BIO* bp_public = BIO_new_file(publicKeyFile.c_str(), "w+");
     PEM_write_bio_PUBKEY(bp_public, pkey);
     BIO_free(bp_public);
 
-    // Сохранение приватного ключа
     BIO* bp_private = BIO_new_file(privateKeyFile.c_str(), "w+");
     PEM_write_bio_PrivateKey(bp_private, pkey, nullptr, nullptr, 0, nullptr, nullptr);
     BIO_free(bp_private);
@@ -120,7 +118,7 @@ std::string CryptoHandler::EncryptECC(const std::string& plainText, const std::s
     BIO_free(keybio);
 
     if (!pkey) {
-        std::cerr << "Ошибка загрузки публичного ключа\n";
+        std::cerr << "Помилка генерації публічного ключа\n";
         return "";
     }
 
@@ -131,7 +129,7 @@ std::string CryptoHandler::EncryptECC(const std::string& plainText, const std::s
     EVP_PKEY_encrypt(ctx, nullptr, &outlen, (unsigned char*)plainText.c_str(), plainText.size());
     std::vector<unsigned char> encryptedText(outlen);
     if (EVP_PKEY_encrypt(ctx, encryptedText.data(), &outlen, (unsigned char*)plainText.c_str(), plainText.size()) <= 0) {
-        std::cerr << "Ошибка шифрования\n";
+        std::cerr << "Помилка шифрування\n";
         EVP_PKEY_CTX_free(ctx);
         EVP_PKEY_free(pkey);
         return "";
@@ -257,7 +255,7 @@ std::string CryptoHandler::DecryptElGamal(const std::string& cipherText, const s
     BIO_free(keybio);
 
     if (!pkey) {
-        std::cerr << "Ошибка загрузки приватного ключа: " << privateKeyFile << "\n";
+        std::cerr << "Помилка завантаження приватного ключа: " << privateKeyFile << "\n";
         return "";
     }
 
@@ -354,7 +352,7 @@ std::string CryptoHandler::DecryptECC(const std::string& cipherText, const std::
     BIO_free(keybio);
 
     if (!pkey) {
-        std::cerr << "Ошибка загрузки приватного ключа\n";
+        std::cerr << "Помилка завантаження приватного ключа\n";
         return "";
     }
 
@@ -365,7 +363,7 @@ std::string CryptoHandler::DecryptECC(const std::string& cipherText, const std::
     EVP_PKEY_decrypt(ctx, nullptr, &outlen, (unsigned char*)cipherText.c_str(), cipherText.size());
     std::vector<unsigned char> decryptedText(outlen);
     if (EVP_PKEY_decrypt(ctx, decryptedText.data(), &outlen, (unsigned char*)cipherText.c_str(), cipherText.size()) <= 0) {
-        std::cerr << "Ошибка дешифрования\n";
+        std::cerr << "Помилка дешифрування\n";
         EVP_PKEY_CTX_free(ctx);
         EVP_PKEY_free(pkey);
         return "";

@@ -150,9 +150,6 @@
     <ClInclude Include="UIAbout.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="UIForm.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UIForm1.h">
@@ -169,7 +166,6 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\uni\3 курс\ОС\kursach\AsymetricEncryption\AsymetricEncryption\libs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="UIAbout.cpp" />
-    <ClCompile Include="UIForm.cpp" />
     <ClCompile Include="UIForm1.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -200,9 +196,6 @@
     <EmbeddedResource Include="UIAbout.resx">
       <DependentUpon>UIAbout.h</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIForm.resx">
-      <DependentUpon>UIForm.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIForm1.resx">
       <DependentUpon>UIForm1.h</DependentUpon>

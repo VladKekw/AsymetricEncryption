@@ -42,13 +42,15 @@ namespace AsymetricEncryption {
 	private: System::Windows::Forms::Label^ label3;
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::RichTextBox^ richTextBox1;
+	private: System::Windows::Forms::ToolTip^ toolTip1;
+	private: System::ComponentModel::IContainer^ components;
 
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -57,6 +59,8 @@ namespace AsymetricEncryption {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(UIAbout::typeid));
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -64,6 +68,7 @@ namespace AsymetricEncryption {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -74,8 +79,8 @@ namespace AsymetricEncryption {
 			this->pictureBox1->Size = System::Drawing::Size(127, 119);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
-			this->pictureBox1->SizeMode = PictureBoxSizeMode::Zoom;
 			this->pictureBox1->Image = Image::FromFile(Application::StartupPath + "\\lock.png");
+			this->pictureBox1->SizeMode = PictureBoxSizeMode::Zoom;
 			// 
 			// button1
 			// 
@@ -94,7 +99,7 @@ namespace AsymetricEncryption {
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(158, 13);
 			this->label1->TabIndex = 2;
-			this->label1->Text = L"Асиметричний шифрувальник";
+			this->label1->Text = L"Асиметричний шифрувальник (AsE) ";
 			// 
 			// label2
 			// 
@@ -129,10 +134,27 @@ namespace AsymetricEncryption {
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->Size = System::Drawing::Size(379, 172);
 			this->richTextBox1->TabIndex = 6;
-			this->richTextBox1->Text = L"Тема роботи \"Розробка програмного застосунку асиметричного шифрування текстових даних \" \n Застосунок виконано відповідно до індивідуального завдання. \n Застосунок дозволяє: \n 1.Обирати алгоритм шифрування \n 2. Шифрувати текстовий файл \n 3. Дешифрувати текстовий файл ";
+			this->richTextBox1->Text = resources->GetString(L"richTextBox1.Text");
+			this->richTextBox1->ReadOnly = true;
+
+			this->toolTip1->AutoPopDelay = 5000;
+			this->toolTip1->InitialDelay = 500;
+			this->toolTip1->ReshowDelay = 200;
+
+			this->toolTip1->SetToolTip(this->button1, "Закриває вікно \"Про програму\"");
+			this->toolTip1->SetToolTip(this->pictureBox1, "Відображає логотип програми");
+			this->toolTip1->SetToolTip(this->richTextBox1, "Відображає інформацію про можливості програми");
+
+
+
+
+
 			// 
 			// UIAbout
 			// 
+
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
 			this->Icon = gcnew System::Drawing::Icon("lock.ico");
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
