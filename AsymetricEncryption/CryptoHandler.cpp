@@ -19,17 +19,59 @@ namespace fs = std::filesystem;
 CryptoHandler::CryptoHandler() {}
 
 
+//void CryptoHandler::GenerateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile) {
+//    if (currentAlgorithm == "RSA") {
+//        GenerateKeysRSA(publicKeyFile, privateKeyFile);
+//    }
+//    else if (currentAlgorithm == "ElGamal") {
+//        GenerateKeysElGamal(publicKeyFile, privateKeyFile);
+//    }
+//    else if (currentAlgorithm == "ECC") {
+//        GenerateKeysECC(publicKeyFile, privateKeyFile);
+//    }
+//}
+
 void CryptoHandler::GenerateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile) {
-    if (currentAlgorithm == "RSA") {
-        GenerateKeysRSA(publicKeyFile, privateKeyFile);
+    try {
+        for (int i = 0; i < 10; ++i) {
+            std::string pubTmp = "temp_pub_" + std::to_string(i) + ".key";
+            std::string privTmp = "temp_priv_" + std::to_string(i) + ".key";
+
+            if (currentAlgorithm == "RSA") {
+                GenerateKeysRSA(pubTmp, privTmp);
+            }
+            else if (currentAlgorithm == "ElGamal") {
+                GenerateKeysElGamal(pubTmp, privTmp);
+            }
+            else if (currentAlgorithm == "ECC") {
+                GenerateKeysECC(pubTmp, privTmp);
+            }
+
+           
+            if (std::filesystem::exists(pubTmp)) {
+                std::filesystem::remove(pubTmp);
+            }
+            if (std::filesystem::exists(privTmp)) {
+                std::filesystem::remove(privTmp);
+            }
+        }
+
+        // final keys
+        if (currentAlgorithm == "RSA") {
+            GenerateKeysRSA(publicKeyFile, privateKeyFile);
+        }
+        else if (currentAlgorithm == "ElGamal") {
+            GenerateKeysElGamal(publicKeyFile, privateKeyFile);
+        }
+        else if (currentAlgorithm == "ECC") {
+            GenerateKeysECC(publicKeyFile, privateKeyFile);
+        }
     }
-    else if (currentAlgorithm == "ElGamal") {
-        GenerateKeysElGamal(publicKeyFile, privateKeyFile);
-    }
-    else if (currentAlgorithm == "ECC") {
-        GenerateKeysECC(publicKeyFile, privateKeyFile);
+    catch (const std::exception& e) {
+        std::cerr << "Помилка при генерації ключів: " << e.what() << std::endl;
     }
 }
+
 
 void CryptoHandler::GenerateKeysElGamal(const std::string& publicKeyFile, const std::string& privateKeyFile) {
     EVP_PKEY_CTX* ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_DHX, nullptr);
@@ -373,4 +415,18 @@ std::string CryptoHandler::DecryptECC(const std::string& cipherText, const std::
     EVP_PKEY_free(pkey);
 
     return std::string(decryptedText.begin(), decryptedText.end());
+}
+
+void CryptoHandler::BackupFile(const std::string& originalFilePath) {
+    namespace fs = std::filesystem;
+
+    fs::path originalPath(originalFilePath);
+    if (!fs::exists(originalPath)) return;
+
+    
+    std::string baseName = originalPath.stem().string(); 
+    std::string ext = originalPath.extension().string();
+    fs::path copyPath = originalPath.parent_path() / (baseName + "_copy" + ext);
+
+    fs::copy_file(originalPath, copyPath, fs::copy_options::overwrite_existing);
 }

@@ -25,6 +25,7 @@ void MainForm::OnEncrypt() {
     }
 
     try {
+        cryptoHandler.BackupFile(selectedFile);
         std::string plainText = FileHandler::ReadFile(selectedFile);
         std::string encryptedText = cryptoHandler.Encrypt(plainText, selectedKey);
 
