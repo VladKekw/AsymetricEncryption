@@ -16,7 +16,9 @@
 
 namespace fs = std::filesystem;
 
-CryptoHandler::CryptoHandler() {}
+CryptoHandler::CryptoHandler() {
+    currentAlgorithm = "RSA";
+}
 
 
 //void CryptoHandler::GenerateKeys(const std::string& publicKeyFile, const std::string& privateKeyFile) {

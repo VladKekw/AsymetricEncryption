@@ -102,10 +102,17 @@
     <Image Include="C:\Users\38068\Downloads\lock.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="c:\users\38068\downloads\icon2.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="lock.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\Resourecs\Resource.resx">
-      <Filter>Resource Files</Filter>
-    </EmbeddedResource>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\x64\Debug\AsymetricEncryption.exe.embed.manifest" />
   </ItemGroup>
 </Project>

@@ -74,12 +74,13 @@ namespace AsymetricEncryption {
 			// 
 			// pictureBox1
 			// 
+			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->Location = System::Drawing::Point(12, 12);
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->Size = System::Drawing::Size(127, 119);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
-			this->pictureBox1->Image = Image::FromFile(Application::StartupPath + "\\lock.png");
+			this->toolTip1->SetToolTip(this->pictureBox1, L"Відображає логотип програми");
 			this->pictureBox1->SizeMode = PictureBoxSizeMode::Zoom;
 			// 
 			// button1
@@ -89,6 +90,7 @@ namespace AsymetricEncryption {
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 1;
 			this->button1->Text = L"Закрити";
+			this->toolTip1->SetToolTip(this->button1, L"Закриває вікно \"Про програму\"");
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &UIAbout::button1_Click);
 			// 
@@ -97,7 +99,7 @@ namespace AsymetricEncryption {
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(145, 12);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(158, 13);
+			this->label1->Size = System::Drawing::Size(189, 13);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Асиметричний шифрувальник (AsE) ";
 			// 
@@ -106,9 +108,9 @@ namespace AsymetricEncryption {
 			this->label2->AutoSize = true;
 			this->label2->Location = System::Drawing::Point(147, 48);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(73, 13);
+			this->label2->Size = System::Drawing::Size(76, 13);
 			this->label2->TabIndex = 3;
-			this->label2->Text = L"Версія 1.0.00";
+			this->label2->Text = L"Версія 1.0.0.0";
 			// 
 			// label3
 			// 
@@ -132,30 +134,20 @@ namespace AsymetricEncryption {
 			// 
 			this->richTextBox1->Location = System::Drawing::Point(12, 165);
 			this->richTextBox1->Name = L"richTextBox1";
+			this->richTextBox1->ReadOnly = true;
 			this->richTextBox1->Size = System::Drawing::Size(379, 172);
 			this->richTextBox1->TabIndex = 6;
 			this->richTextBox1->Text = resources->GetString(L"richTextBox1.Text");
-			this->richTextBox1->ReadOnly = true;
-
+			this->toolTip1->SetToolTip(this->richTextBox1, L"Відображає інформацію про можливості програми");
+			// 
+			// toolTip1
+			// 
 			this->toolTip1->AutoPopDelay = 5000;
 			this->toolTip1->InitialDelay = 500;
 			this->toolTip1->ReshowDelay = 200;
-
-			this->toolTip1->SetToolTip(this->button1, "Закриває вікно \"Про програму\"");
-			this->toolTip1->SetToolTip(this->pictureBox1, "Відображає логотип програми");
-			this->toolTip1->SetToolTip(this->richTextBox1, "Відображає інформацію про можливості програми");
-
-
-
-
-
 			// 
 			// UIAbout
 			// 
-
-			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MaximizeBox = false;
-			this->Icon = gcnew System::Drawing::Icon("lock.ico");
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(403, 395);
@@ -166,6 +158,9 @@ namespace AsymetricEncryption {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->pictureBox1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
+			this->MaximizeBox = false;
 			this->Name = L"UIAbout";
 			this->Text = L"Про програму";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();

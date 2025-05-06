@@ -3,6 +3,7 @@
 #include <msclr/marshal_cppstd.h>
 #include "MainForm.h"
 #include "UIAbout.h"
+#include <windows.h>
 
 namespace AsymetricEncryption {
 
@@ -70,9 +71,14 @@ namespace AsymetricEncryption {
 	private: System::Windows::Forms::ToolStripMenuItem^ mnieig;
 	private: System::Windows::Forms::ToolStripMenuItem^ chooseKeyToolStripMenuItem;
 	private: System::Windows::Forms::ToolStrip^ toolStrip1;
-	private: System::Windows::Forms::ToolStripButton^ toolStripButton1;
-	private: System::Windows::Forms::ToolStripButton^ toolStripButton2;
-	private: System::Windows::Forms::ToolStripButton^ toolStripButton3;
+	private: System::Windows::Forms::ToolStripButton^ toolStripButtonGenerateKeys;
+
+	private: System::Windows::Forms::ToolStripButton^ toolStripButtonEncrypt;
+
+	private: System::Windows::Forms::ToolStripButton^ toolStripButtonDecrypt;
+
+
+
 
 	private: System::Windows::Forms::TextBox^ txbOrgtext;
 	private: System::Windows::Forms::TableLayoutPanel^ tableLayoutPanel1;
@@ -81,6 +87,7 @@ namespace AsymetricEncryption {
 	private: System::Windows::Forms::SaveFileDialog^ dlgsave;
 	private: System::Windows::Forms::ToolStripStatusLabel^ lblCurrentAlghoInfo;
 	private: System::Windows::Forms::ToolStripStatusLabel^ lblCurrentAlgho;
+	private: System::Windows::Forms::ToolTip^ toolTip2;
 
 
 
@@ -129,13 +136,14 @@ namespace AsymetricEncryption {
 			this->lblCurrentAlgho = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->toolTip1 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
-			this->toolStripButton1 = (gcnew System::Windows::Forms::ToolStripButton());
-			this->toolStripButton2 = (gcnew System::Windows::Forms::ToolStripButton());
-			this->toolStripButton3 = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButtonGenerateKeys = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButtonEncrypt = (gcnew System::Windows::Forms::ToolStripButton());
+			this->toolStripButtonDecrypt = (gcnew System::Windows::Forms::ToolStripButton());
 			this->txbOrgtext = (gcnew System::Windows::Forms::TextBox());
 			this->tableLayoutPanel1 = (gcnew System::Windows::Forms::TableLayoutPanel());
 			this->txbCrypttext = (gcnew System::Windows::Forms::TextBox());
 			this->dlgsave = (gcnew System::Windows::Forms::SaveFileDialog());
+			this->toolTip2 = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->menuStrip1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
 			this->toolStrip1->SuspendLayout();
@@ -166,12 +174,14 @@ namespace AsymetricEncryption {
 			this->ôàéëToolStripMenuItem->Name = L"ôàéëToolStripMenuItem";
 			this->ôàéëToolStripMenuItem->Size = System::Drawing::Size(48, 20);
 			this->ôàéëToolStripMenuItem->Text = L"Ôàéë";
+			this->ôàéëToolStripMenuItem->ToolTipText = L"Îïö³¿ ðîáîòè ç ôàéëàìè";
 			// 
 			// îáðàòèÒåêñòîâèéÔàéëToolStripMenuItem
 			// 
 			this->îáðàòèÒåêñòîâèéÔàéëToolStripMenuItem->Name = L"îáðàòèÒåêñòîâèéÔàéëToolStripMenuItem";
 			this->îáðàòèÒåêñòîâèéÔàéëToolStripMenuItem->Size = System::Drawing::Size(205, 22);
 			this->îáðàòèÒåêñòîâèéÔàéëToolStripMenuItem->Text = L"Îáðàòè òåêñòîâèé ôàéë";
+			this->îáðàòèÒåêñòîâèéÔàéëToolStripMenuItem->ToolTipText = L"Îáèðàº òåêñòîâèé ôàéë";
 			this->îáðàòèÒåêñòîâèéÔàéëToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::chooseFileToolStripMenuItem_Click);
 			// 
 			// îáðàòèÊëþ÷ToolStripMenuItem
@@ -179,6 +189,7 @@ namespace AsymetricEncryption {
 			this->îáðàòèÊëþ÷ToolStripMenuItem->Name = L"îáðàòèÊëþ÷ToolStripMenuItem";
 			this->îáðàòèÊëþ÷ToolStripMenuItem->Size = System::Drawing::Size(205, 22);
 			this->îáðàòèÊëþ÷ToolStripMenuItem->Text = L"Îáðàòè êëþ÷";
+			this->îáðàòèÊëþ÷ToolStripMenuItem->ToolTipText = L"Îáèðàé ôàéë êëþ÷à";
 			this->îáðàòèÊëþ÷ToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::chooseKeyToolStripMenuItem_Click);
 			// 
 			// mniSave
@@ -186,6 +197,7 @@ namespace AsymetricEncryption {
 			this->mniSave->Name = L"mniSave";
 			this->mniSave->Size = System::Drawing::Size(205, 22);
 			this->mniSave->Text = L"Çáåðåãòè";
+			this->mniSave->ToolTipText = L"Çáåð³ãàº ó ïîòî÷íîìó ôàéë³";
 			this->mniSave->Click += gcnew System::EventHandler(this, &UIForm1::mniSave_Click);
 			// 
 			// mniSaveas
@@ -193,6 +205,7 @@ namespace AsymetricEncryption {
 			this->mniSaveas->Name = L"mniSaveas";
 			this->mniSaveas->Size = System::Drawing::Size(205, 22);
 			this->mniSaveas->Text = L"Çáåðåãòè ÿê";
+			this->mniSaveas->ToolTipText = L"Çáåð³ãàº çà âèçíà÷åíèì øëÿõîì";
 			this->mniSaveas->Click += gcnew System::EventHandler(this, &UIForm1::mniSaveas_Click);
 			// 
 			// toolStripMenuItem1
@@ -205,6 +218,7 @@ namespace AsymetricEncryption {
 			this->çàêðèòèToolStripMenuItem->Name = L"çàêðèòèToolStripMenuItem";
 			this->çàêðèòèToolStripMenuItem->Size = System::Drawing::Size(205, 22);
 			this->çàêðèòèToolStripMenuItem->Text = L"Çàêðèòè";
+			this->çàêðèòèToolStripMenuItem->ToolTipText = L"Çàêðèâàº ïðîãðàìó";
 			this->çàêðèòèToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::çàêðèòèToolStripMenuItem_Click);
 			// 
 			// øèôðóâàííÿToolStripMenuItem
@@ -216,6 +230,7 @@ namespace AsymetricEncryption {
 			this->øèôðóâàííÿToolStripMenuItem->Name = L"øèôðóâàííÿToolStripMenuItem";
 			this->øèôðóâàííÿToolStripMenuItem->Size = System::Drawing::Size(91, 20);
 			this->øèôðóâàííÿToolStripMenuItem->Text = L"Øèôðóâàííÿ";
+			this->øèôðóâàííÿToolStripMenuItem->ToolTipText = L"Êðèïòîãðàô³÷í³ ìåòîäè ïðîãðàìè";
 			// 
 			// ãåíåðóâàòèÊëþ÷³ToolStripMenuItem
 			// 
@@ -229,6 +244,7 @@ namespace AsymetricEncryption {
 			this->øèôðóâàòèToolStripMenuItem->Name = L"øèôðóâàòèToolStripMenuItem";
 			this->øèôðóâàòèToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->øèôðóâàòèToolStripMenuItem->Text = L"Øèôðóâàòè";
+			this->øèôðóâàòèToolStripMenuItem->ToolTipText = L"Øèôðóº òåêñò";
 			this->øèôðóâàòèToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::button2_Click);
 			// 
 			// äåøèôðóâàòèToolStripMenuItem
@@ -236,6 +252,7 @@ namespace AsymetricEncryption {
 			this->äåøèôðóâàòèToolStripMenuItem->Name = L"äåøèôðóâàòèToolStripMenuItem";
 			this->äåøèôðóâàòèToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->äåøèôðóâàòèToolStripMenuItem->Text = L"Äåøèôðóâàòè";
+			this->äåøèôðóâàòèToolStripMenuItem->ToolTipText = L"Äåøèôðóº òåêñò";
 			this->äåøèôðóâàòèToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::button3_Click);
 			// 
 			// toolStripMenuItem2
@@ -252,6 +269,7 @@ namespace AsymetricEncryption {
 			this->mnialgorithm->Name = L"mnialgorithm";
 			this->mnialgorithm->Size = System::Drawing::Size(180, 22);
 			this->mnialgorithm->Text = L"Àëãîðèòìè";
+			this->mnialgorithm->ToolTipText = L"Äàº ìîæëèâ³ñòü îáðàòè 1 ³ç 3 àëãîðèòì³â";
 			// 
 			// mnirsa
 			// 
@@ -280,6 +298,7 @@ namespace AsymetricEncryption {
 			this->aboutProgramToolStripMenuItem->Name = L"aboutProgramToolStripMenuItem";
 			this->aboutProgramToolStripMenuItem->Size = System::Drawing::Size(99, 20);
 			this->aboutProgramToolStripMenuItem->Text = L"Ïðî ïðîãðàìó";
+			this->aboutProgramToolStripMenuItem->ToolTipText = L"Â³äêðèâàº ³íôîðìàö³éíå â³êíî";
 			this->aboutProgramToolStripMenuItem->Click += gcnew System::EventHandler(this, &UIForm1::aboutProgramToolStripMenuItem_Click);
 			// 
 			// progressBar1
@@ -338,8 +357,8 @@ namespace AsymetricEncryption {
 			// 
 			this->toolStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
 			this->toolStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->toolStripButton1,
-					this->toolStripButton2, this->toolStripButton3
+				this->toolStripButtonGenerateKeys,
+					this->toolStripButtonEncrypt, this->toolStripButtonDecrypt
 			});
 			this->toolStrip1->Location = System::Drawing::Point(0, 24);
 			this->toolStrip1->Name = L"toolStrip1";
@@ -347,35 +366,38 @@ namespace AsymetricEncryption {
 			this->toolStrip1->TabIndex = 10;
 			this->toolStrip1->Text = L"toolStrip1";
 			// 
-			// toolStripButton1
+			// toolStripButtonGenerateKeys
 			// 
-			this->toolStripButton1->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->toolStripButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton1.Image")));
-			this->toolStripButton1->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->toolStripButton1->Name = L"toolStripButton1";
-			this->toolStripButton1->Size = System::Drawing::Size(24, 24);
-			this->toolStripButton1->Text = L"toolStripButton1";
-			this->toolStripButton1->Click += gcnew System::EventHandler(this, &UIForm1::button1_Click);
+			this->toolStripButtonGenerateKeys->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButtonGenerateKeys->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButtonGenerateKeys.Image")));
+			this->toolStripButtonGenerateKeys->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButtonGenerateKeys->Name = L"toolStripButtonGenerateKeys";
+			this->toolStripButtonGenerateKeys->Size = System::Drawing::Size(24, 24);
+			this->toolStripButtonGenerateKeys->Text = L"toolStripButton1";
+			this->toolStripButtonGenerateKeys->ToolTipText = L"Ãåíåðóº êðèïòîãðàô³÷í³ êëþ÷³";
+			this->toolStripButtonGenerateKeys->Click += gcnew System::EventHandler(this, &UIForm1::button1_Click);
 			// 
-			// toolStripButton2
+			// toolStripButtonEncrypt
 			// 
-			this->toolStripButton2->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->toolStripButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton2.Image")));
-			this->toolStripButton2->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->toolStripButton2->Name = L"toolStripButton2";
-			this->toolStripButton2->Size = System::Drawing::Size(24, 24);
-			this->toolStripButton2->Text = L"toolStripButton2";
-			this->toolStripButton2->Click += gcnew System::EventHandler(this, &UIForm1::button2_Click);
+			this->toolStripButtonEncrypt->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButtonEncrypt->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButtonEncrypt.Image")));
+			this->toolStripButtonEncrypt->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButtonEncrypt->Name = L"toolStripButtonEncrypt";
+			this->toolStripButtonEncrypt->Size = System::Drawing::Size(24, 24);
+			this->toolStripButtonEncrypt->Text = L"toolStripButton2";
+			this->toolStripButtonEncrypt->ToolTipText = L"Øèôðóº òåêñò";
+			this->toolStripButtonEncrypt->Click += gcnew System::EventHandler(this, &UIForm1::button2_Click);
 			// 
-			// toolStripButton3
+			// toolStripButtonDecrypt
 			// 
-			this->toolStripButton3->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
-			this->toolStripButton3->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButton3.Image")));
-			this->toolStripButton3->ImageTransparentColor = System::Drawing::Color::Magenta;
-			this->toolStripButton3->Name = L"toolStripButton3";
-			this->toolStripButton3->Size = System::Drawing::Size(24, 24);
-			this->toolStripButton3->Text = L"toolStripButton3";
-			this->toolStripButton3->Click += gcnew System::EventHandler(this, &UIForm1::button3_Click);
+			this->toolStripButtonDecrypt->DisplayStyle = System::Windows::Forms::ToolStripItemDisplayStyle::Image;
+			this->toolStripButtonDecrypt->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"toolStripButtonDecrypt.Image")));
+			this->toolStripButtonDecrypt->ImageTransparentColor = System::Drawing::Color::Magenta;
+			this->toolStripButtonDecrypt->Name = L"toolStripButtonDecrypt";
+			this->toolStripButtonDecrypt->Size = System::Drawing::Size(24, 24);
+			this->toolStripButtonDecrypt->Text = L"toolStripButton3";
+			this->toolStripButtonDecrypt->ToolTipText = L"Äåøèôðóº òåêñò";
+			this->toolStripButtonDecrypt->Click += gcnew System::EventHandler(this, &UIForm1::button3_Click);
 			// 
 			// txbOrgtext
 			// 
@@ -432,6 +454,7 @@ namespace AsymetricEncryption {
 			this->Controls->Add(this->progressBar1);
 			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->MaximizeBox = false;
 			this->Name = L"UIForm1";

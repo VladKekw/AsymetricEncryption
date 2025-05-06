@@ -127,6 +127,9 @@
   <data name="lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\AsymetricEncryption\Resources\lock.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="lockico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\AsymetricEncryption\lock.ico;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="txt-file" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\AsymetricEncryption\Resources\txt-file.png;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

@@ -71,6 +71,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -117,7 +120,13 @@
 ;libssl.lib;comdlg32.lib;User32.lib</AdditionalDependencies>
       <AdditionalOptions>/NODEFAULTLIB:LIBCMT /NODEFAULTLIB:MSVCRT
  %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalManifestDependencies>$(IntDir)$(TargetFileName).embed.manifest</AdditionalManifestDependencies>
+      <ManifestFile>x64\Debug\AsymetricEncryption.exe.embed.manifest</ManifestFile>
     </Link>
+    <Manifest>
+      <AdditionalManifestFiles>
+      </AdditionalManifestFiles>
+    </Manifest>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -174,10 +183,12 @@
   <ItemGroup>
     <Image Include="bitmap1.bmp" />
     <Image Include="C:\Users\38068\Downloads\close.png" />
+    <Image Include="c:\users\38068\downloads\icon2.ico" />
     <Image Include="C:\Users\38068\Downloads\key.png" />
     <Image Include="C:\Users\38068\Downloads\AsymetricEncryption.png" />
     <Image Include="C:\Users\38068\Downloads\lock.ico" />
     <Image Include="C:\Users\38068\Downloads\txt-file.png" />
+    <Image Include="lock.ico" />
     <Image Include="Resources\close.png" />
     <Image Include="Resources\key.png" />
     <Image Include="Resources\lock.png" />
@@ -192,7 +203,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\Resourecs\Resource.resx" />
     <EmbeddedResource Include="UIAbout.resx">
       <DependentUpon>UIAbout.h</DependentUpon>
       <SubType>Designer</SubType>
@@ -203,6 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\x64\Debug\AsymetricEncryption.exe.embed.manifest" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
